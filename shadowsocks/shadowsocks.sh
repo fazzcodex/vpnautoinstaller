@@ -1,19 +1,16 @@
 #!/bin/bash
-# ============================================================
-#   FazzPedia||Vpn - Shadowsocks-R Installer
-#   Support: Ubuntu 20.04 / 22.04 / 24.04
-# ============================================================
+# shadowsocks.sh - ShadowsocksR installer
+export DEBIAN_FRONTEND=noninteractive
+GREEN='\033[0;32m'; NC='\033[0m'; YELLOW='\033[1;33m'
+echo -e "${YELLOW}[ShadowsocksR] Installing...${NC}"
+apt-get install -y python3 python3-pip
+pip3 install shadowsocks 2>/dev/null
 
-RED='\033[0;31m'; NC='\033[0m'; GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-
-echo -e "${YELLOW}[SHADOWSOCKS] Installing Shadowsocks-R...${NC}"
-
-apt install -y python3 python3-pip shadowsocks-libev
-
-# Shadowsocks config
+# Pakai shadowsocks-libev sebagai alternatif
+apt-get install -y shadowsocks-libev
 mkdir -p /etc/shadowsocks
-cat > /etc/shadowsocks/config.json <<EOF
+
+cat > /etc/shadowsocks/config.json <<-END
 {
     "server": "0.0.0.0",
     "port_password": {
@@ -23,27 +20,21 @@ cat > /etc/shadowsocks/config.json <<EOF
     },
     "timeout": 300,
     "method": "aes-256-gcm",
-    "fast_open": true,
-    "mode": "tcp_and_udp"
+    "fast_open": false
 }
-EOF
+END
 
-# Systemd service
-cat > /etc/systemd/system/shadowsocks-fazzpedia.service <<EOF
+cat > /etc/systemd/system/shadowsocks.service <<-END
 [Unit]
-Description=FazzPedia Shadowsocks Service
+Description=ShadowsocksR Server
 After=network.target
 [Service]
-Type=forking
-ExecStart=/usr/bin/ss-server -c /etc/shadowsocks/config.json -u -d start
-ExecStop=/usr/bin/ss-server -c /etc/shadowsocks/config.json -d stop
+ExecStart=/usr/bin/ss-server -c /etc/shadowsocks/config.json
 Restart=always
 [Install]
 WantedBy=multi-user.target
-EOF
-
+END
 systemctl daemon-reload
-systemctl enable shadowsocks-fazzpedia
-systemctl start shadowsocks-fazzpedia
-
-echo -e "${GREEN}[SHADOWSOCKS] Done! Port: 1443-1445, Method: aes-256-gcm${NC}"
+systemctl enable shadowsocks
+systemctl restart shadowsocks
+echo -e "${GREEN}[ShadowsocksR] Done! Port 1443-1543${NC}"

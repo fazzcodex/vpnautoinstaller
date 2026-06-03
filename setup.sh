@@ -1,1 +1,190 @@
-bash <(echo "IyEvYmluL2Jhc2gKIyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KIyAgIEZhenpQZWRpYXx8VnBuIC0gQXV0byBJbnN0YWxsZXIgU2NyaXB0ICh3aXRoIExpY2Vuc2UpCiMgICBUZWxlZ3JhbSA6IGh0dHBzOi8vdC5tZS9GYXp6Q29kZXgKIyAgIFN1cHBvcnQgIDogVWJ1bnR1IDIwLjA0IC8gMjIuMDQgLyAyNC4wNAojID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQoKaWYgWyAiJHtFVUlEfSIgLW5lIDAgXTsgdGhlbgogICAgZWNobyAiWW91IG5lZWQgdG8gcnVuIHRoaXMgc2NyaXB0IGFzIHJvb3QiCiAgICBleGl0IDEKZmkKCmlmIFsgIiQoc3lzdGVtZC1kZXRlY3QtdmlydCkiID09ICJvcGVudnoiIF07IHRoZW4KICAgIGVjaG8gIk9wZW5WWiBpcyBub3Qgc3VwcG9ydGVkIgogICAgZXhpdCAxCmZpCgojIENvbG9ycwpSRUQ9J1wwMzNbMDszMW0nOyBOQz0nXDAzM1swbSc7IEdSRUVOPSdcMDMzWzA7MzJtJwpPUkFOR0U9J1wwMzNbMDszM20nOyBCTFVFPSdcMDMzWzA7MzRtJzsgUFVSUExFPSdcMDMzWzA7MzVtJwpDWUFOPSdcMDMzWzA7MzZtJzsgWUVMTE9XPSdcMDMzWzE7MzNtJzsgV0hJVEU9J1wwMzNbMTszN20nOyBCT0xEPSdcMDMzWzFtJwoKRkFaWkJBU0U9InJhdy5naXRodWJ1c2VyY29udGVudC5jb20vRmF6ekNvZGV4L2ZhenpwZWRpYS12cG4vbWFpbiIKCk1ZSVA9JChjdXJsIC1zIGlwaW5mby5pby9pcCkKY2xlYXIKCmJhbm5lcigpIHsKICAgIGVjaG8gLWUgIiR7Q1lBTn09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0ke05DfSIKICAgIGVjaG8gLWUgIiR7WUVMTE9XfSAgIOKWiOKWiOKWiOKWiOKWiOKWiOKWiOKVlyDilojilojilojilojilojilZcg4paI4paI4paI4paI4paI4paI4paI4pWX4paI4paI4paI4paI4paI4paI4paI4pWXJHtOQ30iCiAgICBlY2hvIC1lICIke1lFTExPV30gICDilojilojilZTilZDilZDilZDilZDilZ3ilojilojilZTilZDilZDilojilojilZfilZrilZDilZDilojilojilojilZTilZ3ilZrilZDilZDilojilojilojilZTilZ0ke05DfSIKICAgIGVjaG8gLWUgIiR7WUVMTE9XfSAgIOKWiOKWiOKWiOKWiOKWiOKVlyAg4paI4paI4paI4paI4paI4paI4paI4pWRICDilojilojilojilZTilZ0gICDilojilojilojilZTilZ0gJHtOQ30iCiAgICBlY2hvIC1lICIke1lFTExPV30gICDilojilojilZTilZDilZDilZ0gIOKWiOKWiOKVlOKVkOKVkOKWiOKWiOKVkSDilojilojilojilZTilZ0gICDilojilojilojilZTilZ0gICR7TkN9IgogICAgZWNobyAtZSAiJHtZRUxMT1d9ICAg4paI4paI4pWRICAgICDilojilojilZEgIOKWiOKWiOKVkeKWiOKWiOKWiOKWiOKWiOKWiOKWiOKVl+KWiOKWiOKWiOKWiOKWiOKWiOKWiOKVlyAke05DfSIKICAgIGVjaG8gLWUgIiR7WUVMTE9XfSAgIOKVmuKVkOKVnSAgICAg4pWa4pWQ4pWdICDilZrilZDilZ3ilZrilZDilZDilZDilZDilZDilZDilZ3ilZrilZDilZDilZDilZDilZDilZDilZ0ke05DfSIKICAgIGVjaG8gLWUgIiIKICAgIGVjaG8gLWUgIiR7V0hJVEV9ICAgICAgICBGYXp6UGVkaWEgfHwgVnBuIEF1dG8gSW5zdGFsbGVyJHtOQ30iCiAgICBlY2hvIC1lICIke0NZQU59PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09JHtOQ30iCiAgICBlY2hvIC1lICIgJHtHUkVFTn1UZWxlZ3JhbSA6IGh0dHBzOi8vdC5tZS9mYXp6cGVkaWF2cG4ke05DfSIKICAgIGVjaG8gLWUgIiAke0dSRUVOfUlQIFZQUyAgIDogJHtNWUlQfSR7TkN9IgogICAgZWNobyAtZSAiJHtDWUFOfT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PSR7TkN9IgogICAgZWNobyAiIgp9CgpiYW5uZXIKCmlmIFsgLWYgIi9ldGMvZmF6enBlZGlhL2luc3RhbGxlZCIgXTsgdGhlbgogICAgZWNobyAtZSAiJHtSRUR9U2NyaXB0IEFscmVhZHkgSW5zdGFsbGVkISR7TkN9IgogICAgZXhpdCAwCmZpCgojID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQojIFtUQU1CQUhBTl0gTElDRU5TRSBDSEVDSyDigJQgdmFsaWRhc2kgYWNjZXNzIGtleSBkdWx1CiMgPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CmVjaG8gLWUgIiR7WUVMTE9XfVt+XSBNZW1lcmlrc2EgbGlzZW5zaSBpbnN0YWxhc2kuLi4ke05DfSIKYXB0LWdldCBpbnN0YWxsIC15IGN1cmwganEgLXFxIDI+L2Rldi9udWxsCgojIERvd25sb2FkIGxpY2Vuc2Uuc2ggZGFyaSByZXBvIChhdGF1IGJpc2EgbGFuZ3N1bmcgZGktYnVuZGxlKQppZiBbICEgLWYgIi90bXAvbGljZW5zZS5zaCIgXTsgdGhlbgogICAgY3VybCAtcyAiaHR0cHM6Ly8ke0ZBWlpCQVNFfS9saWNlbnNlLnNoIiAtbyAvdG1wL2xpY2Vuc2Uuc2ggMj4vZGV2L251bGwKICAgICMgRmFsbGJhY2s6IGthbGF1IGJlbHVtIGFkYSBkaSByZXBvLCBwYWthaSB5YW5nIGRpYnVuZGxlIGJlcnNhbWEgc2V0dXAuc2gKICAgIGlmIFsgISAtcyAiL3RtcC9saWNlbnNlLnNoIiBdOyB0aGVuCiAgICAgICAgU0NSSVBUX0RJUj0iJChjZCAiJChkaXJuYW1lICIke0JBU0hfU09VUkNFWzBdfSIpIiAmJiBwd2QpIgogICAgICAgIGlmIFsgLWYgIiR7U0NSSVBUX0RJUn0vbGljZW5zZS5zaCIgXTsgdGhlbgogICAgICAgICAgICBjcCAiJHtTQ1JJUFRfRElSfS9saWNlbnNlLnNoIiAvdG1wL2xpY2Vuc2Uuc2gKICAgICAgICBlbHNlCiAgICAgICAgICAgIGVjaG8gLWUgIiR7UkVEfVvinJddIEZpbGUgbGljZW5zZS5zaCB0aWRhayBkaXRlbXVrYW4hJHtOQ30iCiAgICAgICAgICAgIGV4aXQgMQogICAgICAgIGZpCiAgICBmaQogICAgY2htb2QgK3ggL3RtcC9saWNlbnNlLnNoCmZpCgojIFNvdXJjZSBsYWx1IGphbGFua2FuIOKAlCBha2FuIGV4aXQgamlrYSBrZXkgdGlkYWsgdmFsaWQKc291cmNlIC90bXAvbGljZW5zZS5zaApydW5fbGljZW5zZV9jaGVjawojID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQoKIyBEZXRlY3QgT1MKc291cmNlIC9ldGMvb3MtcmVsZWFzZQpWRVI9JFZFUlNJT05fSUQKZWNobyAtZSAiJHtHUkVFTn1bSU5GT10gRGV0ZWN0ZWQgVWJ1bnR1ICR7VkVSfSR7TkN9IgoKY2FzZSAkVkVSIGluCiAgICAyMC4wNHwyMi4wNHwyNC4wNCkgZWNobyAtZSAiJHtHUkVFTn1bT0tdIFVidW50dSAke1ZFUn0gc3VwcG9ydGVkISR7TkN9IiA7OwogICAgKikgZWNobyAtZSAiJHtSRUR9W0VSUk9SXSBVYnVudHUgJHtWRVJ9IG5vdCBzdXBwb3J0ZWQuJHtOQ30iOyBleGl0IDEgOzsKZXNhYwoKbWtkaXIgLXAgL2V0Yy9mYXp6cGVkaWEgL3Zhci9saWIvZmF6enBlZGlhCmVjaG8gIklQPSR7TVlJUH0iID4gL3Zhci9saWIvZmF6enBlZGlhL2NvbmZpZy5jb25mCmVjaG8gIlZFUj0yLjAiID4+IC92YXIvbGliL2ZhenpwZWRpYS9jb25maWcuY29uZgplY2hvICJCUkFORD1GYXp6UGVkaWF8fFZwbiIgPj4gL3Zhci9saWIvZmF6enBlZGlhL2NvbmZpZy5jb25mCgojID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQojIFN5c3RlbSBTZXR1cCAmIEluc3RhbGwgU2VydmljZXMKIyA9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KYXB0IHVwZGF0ZSAteSAmJiBhcHQgdXBncmFkZSAteQphcHQgZGlzdC11cGdyYWRlIC15CmFwdC1nZXQgcmVtb3ZlIC0tcHVyZ2UgdWZ3IGZpcmV3YWxsZCAteSAyPi9kZXYvbnVsbAphcHQtZ2V0IHJlbW92ZSAtLXB1cmdlIGV4aW00IC15IDI+L2Rldi9udWxsCmFwdCBpbnN0YWxsIC15IHdnZXQgY3VybCBnaXQgc2NyZWVuIHVuemlwIHRhcgoKZWNobyAtZSAiJHtZRUxMT1d9WzIvMTBdIERpc2FibGluZyBJUHY2Li4uJHtOQ30iCmVjaG8gMSA+IC9wcm9jL3N5cy9uZXQvaXB2Ni9jb25mL2FsbC9kaXNhYmxlX2lwdjYKZWNobyAibmV0LmlwdjYuY29uZi5hbGwuZGlzYWJsZV9pcHY2ID0gMSIgPj4gL2V0Yy9zeXNjdGwuY29uZgpzeXNjdGwgLXAKCmVjaG8gLWUgIiR7WUVMTE9XfVszLzEwXSBTZXR0aW5nIFRpbWV6b25lIEFzaWEvSmFrYXJ0YS4uLiR7TkN9Igp0aW1lZGF0ZWN0bCBzZXQtdGltZXpvbmUgQXNpYS9KYWthcnRhCgpjYXQgPiAvZXRjL3N5c3RlbWQvc3lzdGVtL3JjLWxvY2FsLnNlcnZpY2UgPDwtRU5ECltVbml0XQpEZXNjcmlwdGlvbj0vZXRjL3JjLmxvY2FsCkNvbmRpdGlvblBhdGhFeGlzdHM9L2V0Yy9yYy5sb2NhbApbU2VydmljZV0KVHlwZT1mb3JraW5nCkV4ZWNTdGFydD0vZXRjL3JjLmxvY2FsIHN0YXJ0ClRpbWVvdXRTZWM9MApTdGFuZGFyZE91dHB1dD10dHkKUmVtYWluQWZ0ZXJFeGl0PXllcwpTeXNWU3RhcnRQcmlvcml0eT05OQpbSW5zdGFsbF0KV2FudGVkQnk9bXVsdGktdXNlci50YXJnZXQKRU5ECmNhdCA+IC9ldGMvcmMubG9jYWwgPDwtRU5ECiMhL2Jpbi9zaCAtZQpleGl0IDAKRU5ECmNobW9kICt4IC9ldGMvcmMubG9jYWwKc3lzdGVtY3RsIGVuYWJsZSByYy1sb2NhbApzeXN0ZW1jdGwgc3RhcnQgcmMtbG9jYWwuc2VydmljZQoKZWNobyAtZSAiJHtZRUxMT1d9WzQvMTBdIEluc3RhbGxpbmcgU1NIICYgT3BlblZQTi4uLiR7TkN9IgpiYXNoIC9ldGMvZmF6enBlZGlhL2luc3RhbGxlci9zc2gtdnBuLnNoCgplY2hvIC1lICIke1lFTExPV31bNS8xMF0gSW5zdGFsbGluZyBYcmF5Li4uJHtOQ30iCmJhc2ggL2V0Yy9mYXp6cGVkaWEvaW5zdGFsbGVyL3hyYXkuc2gKCmVjaG8gLWUgIiR7WUVMTE9XfVs2LzEwXSBJbnN0YWxsaW5nIFdpcmVndWFyZC4uLiR7TkN9IgpiYXNoIC9ldGMvZmF6enBlZGlhL2luc3RhbGxlci93aXJlZ3VhcmQuc2gKCmVjaG8gLWUgIiR7WUVMTE9XfVs3LzEwXSBJbnN0YWxsaW5nIFNoYWRvd3NvY2tzLVIuLi4ke05DfSIKYmFzaCAvZXRjL2ZhenpwZWRpYS9pbnN0YWxsZXIvc2hhZG93c29ja3Muc2gKCmVjaG8gLWUgIiR7WUVMTE9XfVs4LzEwXSBJbnN0YWxsaW5nIFNTVFAuLi4ke05DfSIKYmFzaCAvZXRjL2ZhenpwZWRpYS9pbnN0YWxsZXIvc3N0cC5zaAoKZWNobyAtZSAiJHtZRUxMT1d9WzkvMTBdIEluc3RhbGxpbmcgTDJUUC9JUFNlYy4uLiR7TkN9IgpiYXNoIC9ldGMvZmF6enBlZGlhL2luc3RhbGxlci9pcHNlYy5zaAoKZWNobyAtZSAiJHtZRUxMT1d9WzEwLzEwXSBJbnN0YWxsaW5nIFdlYlNvY2tldCAmIE9IUC4uLiR7TkN9IgpiYXNoIC9ldGMvZmF6enBlZGlhL2luc3RhbGxlci93ZWJzb2NrZXQuc2gKYmFzaCAvZXRjL2ZhenpwZWRpYS9pbnN0YWxsZXIvb2hwLnNoCgpjcCAvZXRjL2ZhenpwZWRpYS9tZW51L21lbnUuc2ggL3Vzci9sb2NhbC9iaW4vbWVudQpjcCAvZXRjL2ZhenpwZWRpYS9tZW51L21lbnUuc2ggL3Vzci9sb2NhbC9iaW4vZmF6enBlZGlhCmNobW9kICt4IC91c3IvbG9jYWwvYmluL21lbnUgL3Vzci9sb2NhbC9iaW4vZmF6enBlZGlhCgpjYXQgPiAvZXRjL3N5c3RlbWQvc3lzdGVtL2ZhenpwZWRpYS5zZXJ2aWNlIDw8RU9GCltVbml0XQpEZXNjcmlwdGlvbj1GYXp6UGVkaWEgVlBOIEF1dG8gU3RhcnR1cApBZnRlcj1uZXR3b3JrLnRhcmdldApbU2VydmljZV0KVHlwZT1vbmVzaG90CkV4ZWNTdGFydD0vYmluL2Jhc2ggL2V0Yy9mYXp6cGVkaWEvc3RhcnR1cC5zaApSZW1haW5BZnRlckV4aXQ9eWVzCltJbnN0YWxsXQpXYW50ZWRCeT1tdWx0aS11c2VyLnRhcmdldApFT0YKc3lzdGVtY3RsIGRhZW1vbi1yZWxvYWQKc3lzdGVtY3RsIGVuYWJsZSBmYXp6cGVkaWEKCnRvdWNoIC9ldGMvZmF6enBlZGlhL2luc3RhbGxlZAplY2hvICIyLjAiID4gL2V0Yy9mYXp6cGVkaWEvdmVyc2lvbgpoaXN0b3J5IC1jCgpjbGVhcjsgYmFubmVyCmVjaG8gLWUgIiR7Q1lBTn09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0ke05DfSIKZWNobyAtZSAiJHtXSElURX0gICBJTlNUQUxBU0kgU0VMRVNBSSDigJQgRmF6elBlZGlhfHxWcG4gdjIuMCR7TkN9IgplY2hvIC1lICIke0NZQU59PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09JHtOQ30iCmVjaG8gLWUgIiAke1lFTExPV31LZXRpayAnbWVudScgdW50dWsgbWVtYnVrYSBwYW5lbCBGYXp6UGVkaWEke05DfSIKZWNobyAtZSAiJHtDWUFOfT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PSR7TkN9IgplY2hvICIiCmVjaG8gLWUgIiR7WUVMTE9XfVZQUyBha2FuIHJlYm9vdCBkYWxhbSAxNSBkZXRpay4uLiR7TkN9IgpzbGVlcCAxNQpyZWJvb3QK" | base64 -d)
+#!/bin/bash
+# ============================================================
+#   FazzPedia||Vpn - Auto Installer
+#   Telegram : https://t.me/FazzCodex
+#   Support  : Ubuntu 20.04 / 22.04 / 24.04
+# ============================================================
+if [ "${EUID}" -ne 0 ]; then echo "Run as root!"; exit 1; fi
+if [ "$(systemd-detect-virt)" == "openvz" ]; then echo "OpenVZ not supported"; exit 1; fi
+
+RED='\033[0;31m'; NC='\033[0m'; GREEN='\033[0;32m'
+CYAN='\033[0;36m'; YELLOW='\033[1;33m'; WHITE='\033[1;37m'
+
+REPO="https://raw.githubusercontent.com/fazzcodex/vpnautoinstaller/main"
+MYIP=$(curl -s ipinfo.io/ip 2>/dev/null || wget -qO- ipinfo.io/ip)
+clear
+
+banner() {
+echo -e "${CYAN}============================================================${NC}"
+echo -e "${YELLOW}   ███████╗ █████╗ ███████╗███████╗${NC}"
+echo -e "${YELLOW}   ██╔════╝██╔══██╗╚══███╔╝╚══███╔╝${NC}"
+echo -e "${YELLOW}   █████╗  ███████║  ███╔╝   ███╔╝ ${NC}"
+echo -e "${YELLOW}   ██╔══╝  ██╔══██║ ███╔╝   ███╔╝  ${NC}"
+echo -e "${YELLOW}   ██║     ██║  ██║███████╗███████╗ ${NC}"
+echo -e "${YELLOW}   ╚═╝     ╚═╝  ╚═╝╚══════╝╚══════╝ Vpn v2.0${NC}"
+echo -e "${CYAN}============================================================${NC}"
+echo -e " ${GREEN}Telegram : https://t.me/fazzpediavpn${NC}"
+echo -e " ${GREEN}IP VPS   : ${MYIP}${NC}"
+echo -e "${CYAN}============================================================${NC}"
+echo ""
+}
+
+banner
+
+if [ -f "/etc/fazzpedia/installed" ]; then
+    echo -e "${RED}Script Already Installed!${NC}"; exit 0
+fi
+
+source /etc/os-release
+VER=$VERSION_ID
+case $VER in
+    20.04|22.04|24.04) echo -e "${GREEN}[OK] Ubuntu ${VER} supported!${NC}" ;;
+    *) echo -e "${RED}[ERROR] Ubuntu ${VER} not supported.${NC}"; exit 1 ;;
+esac
+
+mkdir -p /etc/fazzpedia /var/lib/crot
+echo "IP=${MYIP}" > /var/lib/crot/ipvps.conf
+
+# ── Download semua file dari GitHub ──────────────────────────
+echo -e "${YELLOW}[1/8] Downloading scripts...${NC}"
+dl() {
+    local src="$1" dst="$2"
+    mkdir -p "$(dirname $dst)"
+    wget -q --tries=3 -O "$dst" "${REPO}/${src}" && chmod +x "$dst" && echo -e "  ${GREEN}✓${NC} $src" || echo -e "  ${RED}✗${NC} $src GAGAL"
+}
+
+dl "ssh/ssh-vpn.sh"        "/etc/fazzpedia/ssh/ssh-vpn.sh"
+dl "ssh/addssh.sh"         "/usr/bin/addssh"
+dl "ssh/delssh.sh"         "/usr/bin/delssh"
+dl "ssh/renewssh.sh"       "/usr/bin/renewssh"
+dl "ssh/cekssh.sh"         "/usr/bin/cekssh"
+dl "ssh/trialssh.sh"       "/usr/bin/trialssh"
+dl "ssh/member.sh"         "/usr/bin/member"
+dl "ssh/delexp.sh"         "/usr/bin/delexp"
+dl "ssh/restart.sh"        "/usr/bin/restart"
+dl "ssh/info.sh"           "/usr/bin/info"
+dl "ssh/ram.sh"            "/usr/bin/ram"
+dl "ssh/autokill.sh"       "/usr/bin/autokill"
+dl "ssh/tendang.sh"        "/usr/bin/tendang"
+dl "ssh/changeport.sh"     "/usr/bin/changeport"
+dl "xray/xray.sh"          "/etc/fazzpedia/xray/xray.sh"
+dl "xray/addvmess.sh"      "/usr/bin/addvmess"
+dl "xray/delvmess.sh"      "/usr/bin/delvmess"
+dl "xray/renewvmess.sh"    "/usr/bin/renewvmess"
+dl "xray/cekvmess.sh"      "/usr/bin/cekvmess"
+dl "xray/addvless.sh"      "/usr/bin/addvless"
+dl "xray/delvless.sh"      "/usr/bin/delvless"
+dl "xray/renewvless.sh"    "/usr/bin/renewvless"
+dl "xray/cekvless.sh"      "/usr/bin/cekvless"
+dl "xray/addtrojan.sh"     "/usr/bin/addtrojan"
+dl "xray/deltrojan.sh"     "/usr/bin/deltrojan"
+dl "xray/renewtrojan.sh"   "/usr/bin/renewtrojan"
+dl "xray/cektrojan.sh"     "/usr/bin/cektrojan"
+dl "wireguard/wireguard.sh"   "/etc/fazzpedia/wireguard/wireguard.sh"
+dl "wireguard/addwg.sh"       "/usr/bin/addwg"
+dl "wireguard/delwg.sh"       "/usr/bin/delwg"
+dl "wireguard/renewwg.sh"     "/usr/bin/renewwg"
+dl "shadowsocks/shadowsocks.sh" "/etc/fazzpedia/shadowsocks/shadowsocks.sh"
+dl "shadowsocks/addss.sh"     "/usr/bin/addss"
+dl "shadowsocks/delss.sh"     "/usr/bin/delss"
+dl "shadowsocks/renewss.sh"   "/usr/bin/renewss"
+dl "shadowsocks/cekss.sh"     "/usr/bin/cekss"
+dl "sstp/sstp.sh"             "/etc/fazzpedia/sstp/sstp.sh"
+dl "sstp/addsstp.sh"          "/usr/bin/addsstp"
+dl "sstp/delsstp.sh"          "/usr/bin/delsstp"
+dl "sstp/renewsstp.sh"        "/usr/bin/renewsstp"
+dl "ipsec/ipsec.sh"           "/etc/fazzpedia/ipsec/ipsec.sh"
+dl "ipsec/addl2tp.sh"         "/usr/bin/addl2tp"
+dl "ipsec/dell2tp.sh"         "/usr/bin/dell2tp"
+dl "ipsec/renewl2tp.sh"       "/usr/bin/renewl2tp"
+dl "websocket/websocket.sh"   "/etc/fazzpedia/websocket/websocket.sh"
+dl "system/setdomain.sh"      "/usr/bin/setdomain"
+dl "system/info.sh"           "/usr/bin/sysinfo"
+dl "backup/backup.sh"         "/usr/bin/backup"
+dl "backup/restore.sh"        "/usr/bin/restore"
+dl "menu.sh"                  "/usr/bin/menu"
+dl "menu.sh"                  "/usr/bin/fazzpedia"
+
+# ── Install Services ─────────────────────────────────────────
+echo -e "${YELLOW}[2/8] Installing SSH & OpenVPN...${NC}"
+bash /etc/fazzpedia/ssh/ssh-vpn.sh
+
+echo -e "${YELLOW}[3/8] Installing Xray...${NC}"
+bash /etc/fazzpedia/xray/xray.sh
+
+echo -e "${YELLOW}[4/8] Installing Wireguard...${NC}"
+bash /etc/fazzpedia/wireguard/wireguard.sh
+
+echo -e "${YELLOW}[5/8] Installing Shadowsocks-R...${NC}"
+bash /etc/fazzpedia/shadowsocks/shadowsocks.sh
+
+echo -e "${YELLOW}[6/8] Installing SSTP...${NC}"
+bash /etc/fazzpedia/sstp/sstp.sh
+
+echo -e "${YELLOW}[7/8] Installing L2TP/IPSec...${NC}"
+bash /etc/fazzpedia/ipsec/ipsec.sh
+
+echo -e "${YELLOW}[8/8] Installing WebSocket & finishing...${NC}"
+bash /etc/fazzpedia/websocket/websocket.sh
+
+# ── Systemd startup service ───────────────────────────────────
+cat > /etc/systemd/system/fazzpedia.service <<-EOF
+[Unit]
+Description=FazzPedia VPN Startup
+After=network.target
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /etc/fazzpedia/startup.sh
+RemainAfterExit=yes
+[Install]
+WantedBy=multi-user.target
+EOF
+systemctl daemon-reload
+systemctl enable fazzpedia
+
+# ── Auto menu saat login ──────────────────────────────────────
+grep -q "fazzpedia-automenu" /root/.bashrc || cat >> /root/.bashrc <<-'BASHRC'
+
+# fazzpedia-automenu
+if [ -f /etc/fazzpedia/installed ] && [ -t 1 ]; then
+    menu
+fi
+BASHRC
+
+touch /etc/fazzpedia/installed
+echo "2.0" > /etc/fazzpedia/version
+history -c
+rm -f /root/setup.sh
+
+clear; banner
+echo -e "${CYAN}============================================================${NC}"
+echo -e "${WHITE}   INSTALASI SELESAI — FazzPedia||Vpn v2.0${NC}"
+echo -e "${CYAN}============================================================${NC}"
+echo -e " ${GREEN}OpenSSH        : 22, 2253${NC}"
+echo -e " ${GREEN}Dropbear       : 109, 143${NC}"
+echo -e " ${GREEN}SSLH Mux       : 443 (SSH+WS+OpenVPN)${NC}"
+echo -e " ${GREEN}Stunnel SSL    : 445, 777, 990${NC}"
+echo -e " ${GREEN}WebSocket      : 8880 (non-TLS)${NC}"
+echo -e " ${GREEN}OpenVPN TCP    : 1194${NC}"
+echo -e " ${GREEN}OpenVPN UDP    : 2200${NC}"
+echo -e " ${GREEN}Squid          : 3128, 8080${NC}"
+echo -e " ${GREEN}BadVPN         : 7100, 7200, 7300${NC}"
+echo -e " ${GREEN}Wireguard      : 7070${NC}"
+echo -e " ${GREEN}L2TP/IPSec     : 1701${NC}"
+echo -e " ${GREEN}SSTP           : 444${NC}"
+echo -e " ${GREEN}Shadowsocks-R  : 1443-1543${NC}"
+echo -e " ${GREEN}Xray VMess TLS : 8443${NC}"
+echo -e " ${GREEN}Xray VMess NTLS: 80${NC}"
+echo -e " ${GREEN}Xray VLess TLS : 8442${NC}"
+echo -e " ${GREEN}Xray VLess NTLS: 8441${NC}"
+echo -e " ${GREEN}Xray Trojan    : 2083${NC}"
+echo -e " ${GREEN}OHP SSH        : 8181${NC}"
+echo -e " ${GREEN}OHP Dropbear   : 8282${NC}"
+echo -e " ${GREEN}OHP OpenVPN    : 8383${NC}"
+echo -e "${CYAN}============================================================${NC}"
+echo -e " ${YELLOW}Ketik 'menu' untuk membuka panel FazzPedia${NC}"
+echo -e "${CYAN}============================================================${NC}"
+echo ""
+echo -e "${YELLOW}VPS reboot dalam 15 detik...${NC}"
+sleep 15
+reboot

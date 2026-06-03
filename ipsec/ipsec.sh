@@ -1,23 +1,14 @@
 #!/bin/bash
-# ============================================================
-#   FazzPedia||Vpn - L2TP/IPSec Installer
-#   Support: Ubuntu 20.04 / 22.04 / 24.04
-# ============================================================
+# ipsec.sh - L2TP/IPSec installer
+export DEBIAN_FRONTEND=noninteractive
+GREEN='\033[0;32m'; NC='\033[0m'; YELLOW='\033[1;33m'
+MYIP=$(cat /etc/fazzpedia/myip 2>/dev/null || curl -s ipinfo.io/ip)
+echo -e "${YELLOW}[L2TP/IPSec] Installing...${NC}"
 
-RED='\033[0;31m'; NC='\033[0m'; GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-MYIP=$(curl -s ipinfo.io/ip)
-NET=$(ip -o -4 route show to default | awk '{print $5}')
-
-echo -e "${YELLOW}[IPSEC] Installing L2TP/IPSec...${NC}"
-
-apt install -y strongswan xl2tpd ppp
-
-PSK="FazzPedia2024Secret"
-echo "$PSK" > /etc/fazzpedia/ipsec_psk.conf
+apt-get install -y strongswan xl2tpd ppp
 
 # IPSec config
-cat > /etc/ipsec.conf <<EOF
+cat > /etc/ipsec.conf <<-END
 config setup
     charondebug="ike 1, knl 1, cfg 0"
     uniqueids=no
@@ -30,67 +21,66 @@ conn %default
     keyexchange=ikev1
     authby=secret
 
-conn L2TP-PSK-noNAT
+conn L2TP-PSK-NAT
     rightsubnet=vhost:%priv
-    also=L2TP-PSK
+    also=L2TP-PSK-noNAT
 
-conn L2TP-PSK
+conn L2TP-PSK-noNAT
     authby=secret
     pfs=no
     auto=add
     keyingtries=3
-    dpddelay=30
-    dpdtimeout=120
-    dpdaction=clear
     rekey=no
-    left=%defaultroute
-    right=%any
+    ikelifetime=8h
+    keylife=1h
     type=transport
+    left=%defaultroute
+    leftid=${MYIP}
     leftprotoport=17/1701
+    right=%any
     rightprotoport=17/%any
-    forceencaps=yes
-EOF
+    dpddelay=40
+    dpdtimeout=130
+    dpdaction=clear
+END
 
-cat > /etc/ipsec.secrets <<EOF
-%any %any : PSK "${PSK}"
-EOF
+PSK=$(openssl rand -base64 16)
+echo ": PSK \"${PSK}\"" > /etc/ipsec.secrets
+echo "$PSK" > /etc/fazzpedia/l2tp_psk
+chmod 600 /etc/ipsec.secrets
 
 # xl2tpd config
-cat > /etc/xl2tpd/xl2tpd.conf <<EOF
+cat > /etc/xl2tpd/xl2tpd.conf <<-END
 [global]
 ipsec saref = yes
+saref refinfo = 30
 
 [lns default]
-ip range = 192.168.98.10-192.168.98.254
-local ip = 192.168.98.1
+ip range = 192.168.42.10-192.168.42.250
+local ip = 192.168.42.1
 require chap = yes
 refuse pap = yes
 require authentication = yes
 ppp debug = yes
 pppoptfile = /etc/ppp/options.xl2tpd
 length bit = yes
-EOF
+END
 
-cat > /etc/ppp/options.xl2tpd <<EOF
+cat > /etc/ppp/options.xl2tpd <<-END
 ipcp-accept-local
 ipcp-accept-remote
 ms-dns 8.8.8.8
 ms-dns 8.8.4.4
 noccp
 auth
-mtu 1280
-mru 1280
-proxyarp
-lcp-echo-failure 4
-lcp-echo-interval 30
+hide-password
+idle 1800
+mtu 1460
+mru 1460
+lock
 connect-delay 5000
-EOF
-
-# NAT
-iptables -t nat -A POSTROUTING -s 192.168.98.0/24 -o ${NET} -j MASQUERADE
-iptables-save > /etc/iptables.rules
+END
 
 systemctl enable strongswan xl2tpd
 systemctl restart strongswan xl2tpd
-
-echo -e "${GREEN}[IPSEC] Done! PSK: ${PSK}, Port: 1701 (L2TP), 500/4500 (IPSec)${NC}"
+echo -e "${GREEN}[L2TP/IPSec] Done! PSK: $PSK | Port 1701${NC}"

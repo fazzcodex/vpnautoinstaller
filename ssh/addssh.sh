@@ -1,236 +1,59 @@
 #!/bin/bash
-# ============================================================
-#   FazzPedia||Vpn - Add SSH Account
-# ============================================================
 RED='\033[0;31m'; NC='\033[0m'; GREEN='\033[0;32m'
-YELLOW='\033[1;33m'; CYAN='\033[0;36m'; WHITE='\033[1;37m'
+CYAN='\033[0;36m'; YELLOW='\033[1;33m'; WHITE='\033[1;37m'
 
-MYIP=$(curl -s ipinfo.io/ip)
-
-addssh() {
+MYIP=$(cat /etc/fazzpedia/myip 2>/dev/null || curl -s ipinfo.io/ip)
+DOMAIN=$(cat /etc/xray/domain 2>/dev/null || echo "$MYIP")
 clear
 echo -e "${CYAN}============================================================${NC}"
-echo -e "${WHITE}          FazzPedia||Vpn - Create SSH Account${NC}"
+echo -e "${YELLOW}         Create SSH & OpenVPN Account${NC}"
 echo -e "${CYAN}============================================================${NC}"
-echo ""
-read -p " Username        : " USER
-read -p " Password        : " PASS
-read -p " Expired (days)  : " DAYS
-read -p " Max Login       : " MAXLOGIN
+echo -ne " Username    : "; read LOGIN
+echo -ne " Password    : "; read PASS
+echo -ne " Expired (hari): "; read DAYS
+echo -e "${CYAN}============================================================${NC}"
 
-if id "$USER" &>/dev/null; then
-    echo -e "${RED}[ERROR] User '$USER' already exists!${NC}"
-    return
+if id "$LOGIN" &>/dev/null; then
+    echo -e "${RED}[!] Username sudah ada!${NC}"; exit 1
 fi
 
-EXPDATE=$(date -d "+${DAYS} days" +"%Y-%m-%d")
-useradd -e "$EXPDATE" -s /bin/false -M "$USER"
-echo "$USER:$PASS" | chpasswd
+useradd -e "$(date -d "$DAYS days" +"%Y-%m-%d")" -s /bin/false -M "$LOGIN"
+echo -e "$PASS\n$PASS" | passwd "$LOGIN" &>/dev/null
 
-# Save maxlogin limit
-echo "$USER $MAXLOGIN" >> /etc/fazzpedia/ssh_limits.conf
+CREATED=$(date +"%Y-%m-%d")
+EXPIRED=$(date -d "$DAYS days" +"%Y-%m-%d")
 
 clear
 echo -e "${CYAN}============================================================${NC}"
-echo -e "${WHITE}       FazzPedia||Vpn - SSH Account Created${NC}"
+echo -e "${GREEN}         Akun SSH & OpenVPN Berhasil Dibuat!${NC}"
 echo -e "${CYAN}============================================================${NC}"
-echo ""
-echo -e " ${YELLOW}Username   :${NC} $USER"
-echo -e " ${YELLOW}Password   :${NC} $PASS"
-echo -e " ${YELLOW}Expired    :${NC} $EXPDATE ($DAYS days)"
-echo -e " ${YELLOW}Max Login  :${NC} $MAXLOGIN"
-echo ""
-echo -e " ${WHITE}── Connection Info ──${NC}"
-echo -e " ${YELLOW}Host/IP    :${NC} $MYIP"
-echo -e " ${YELLOW}SSH Port   :${NC} 22, 443"
-echo -e " ${YELLOW}Dropbear   :${NC} 109, 143"
-echo -e " ${YELLOW}SSL/Stunnel:${NC} 445, 777"
-echo -e " ${YELLOW}WS Non-TLS :${NC} 8880"
-echo -e " ${YELLOW}OHP SSH    :${NC} 8181"
-echo -e " ${YELLOW}OHP DB     :${NC} 8282"
+echo -e " ${WHITE}Username   : ${YELLOW}$LOGIN${NC}"
+echo -e " ${WHITE}Password   : ${YELLOW}$PASS${NC}"
+echo -e " ${WHITE}Created    : ${YELLOW}$CREATED${NC}"
+echo -e " ${WHITE}Expired    : ${YELLOW}$EXPIRED${NC}"
+echo -e "${CYAN}──────────────── Host & Port ────────────────${NC}"
+echo -e " ${WHITE}IP/Host    : ${YELLOW}$MYIP${NC}"
+echo -e " ${WHITE}Domain     : ${YELLOW}$DOMAIN${NC}"
+echo -e "${CYAN}──────────────── SSH ────────────────────────${NC}"
+echo -e " ${WHITE}OpenSSH    : ${YELLOW}22, 2253${NC}"
+echo -e " ${WHITE}Dropbear   : ${YELLOW}109, 143${NC}"
+echo -e " ${WHITE}SSL/TLS    : ${YELLOW}443, 445, 777${NC}"
+echo -e "${CYAN}──────────────── WebSocket ──────────────────${NC}"
+echo -e " ${WHITE}WS TLS     : ${YELLOW}443${NC}"
+echo -e " ${WHITE}WS Non-TLS : ${YELLOW}8880${NC}"
+echo -e "${CYAN}──────────────── OpenVPN ────────────────────${NC}"
+echo -e " ${WHITE}OVPN TCP   : ${YELLOW}1194${NC}"
+echo -e " ${WHITE}OVPN UDP   : ${YELLOW}2200${NC}"
+echo -e " ${WHITE}OVPN SSL   : ${YELLOW}990${NC}"
+echo -e " ${WHITE}OVPN TCP   : ${YELLOW}http://$MYIP:89/tcp.ovpn${NC}"
+echo -e " ${WHITE}OVPN UDP   : ${YELLOW}http://$MYIP:89/udp.ovpn${NC}"
+echo -e "${CYAN}──────────────── Payload ────────────────────${NC}"
+echo -e " ${WHITE}WS TLS     : ${YELLOW}GET wss://bug.com/ HTTP/1.1[crlf]Host: [host][crlf]Upgrade: websocket[crlf][crlf]${NC}"
+echo -e " ${WHITE}WS Non-TLS : ${YELLOW}GET / HTTP/1.1[crlf]Host: [host][crlf]Upgrade: websocket[crlf][crlf]${NC}"
+echo -e "${CYAN}──────────────── BadVPN ─────────────────────${NC}"
+echo -e " ${WHITE}BadVPN     : ${YELLOW}7100, 7200, 7300${NC}"
+echo -e "${CYAN}──────────────── OHP ────────────────────────${NC}"
+echo -e " ${WHITE}OHP SSH    : ${YELLOW}8181${NC}"
+echo -e " ${WHITE}OHP DB     : ${YELLOW}8282${NC}"
+echo -e " ${WHITE}OHP OVPN   : ${YELLOW}8383${NC}"
 echo -e "${CYAN}============================================================${NC}"
-echo ""
-}
-
-delssh() {
-clear
-echo -e "${CYAN}============================================================${NC}"
-echo -e "${WHITE}          FazzPedia||Vpn - Delete SSH Account${NC}"
-echo -e "${CYAN}============================================================${NC}"
-echo ""
-read -p " Username : " USER
-if ! id "$USER" &>/dev/null; then
-    echo -e "${RED}[ERROR] User '$USER' not found!${NC}"
-    return
-fi
-userdel -r "$USER" 2>/dev/null
-sed -i "/^$USER /d" /etc/fazzpedia/ssh_limits.conf
-echo -e "${GREEN}[OK] User '$USER' deleted.${NC}"
-}
-
-renewssh() {
-clear
-echo -e "${CYAN}============================================================${NC}"
-echo -e "${WHITE}         FazzPedia||Vpn - Renew SSH Account${NC}"
-echo -e "${CYAN}============================================================${NC}"
-echo ""
-read -p " Username       : " USER
-read -p " Extend (days)  : " DAYS
-if ! id "$USER" &>/dev/null; then
-    echo -e "${RED}[ERROR] User '$USER' not found!${NC}"
-    return
-fi
-CURRENT=$(chage -l "$USER" | grep "Account expires" | awk -F': ' '{print $2}')
-if [[ "$CURRENT" == "never" ]] || [[ -z "$CURRENT" ]]; then
-    NEWDATE=$(date -d "+${DAYS} days" +"%Y-%m-%d")
-else
-    NEWDATE=$(date -d "$CURRENT +${DAYS} days" +"%Y-%m-%d")
-fi
-chage -E "$NEWDATE" "$USER"
-echo -e "${GREEN}[OK] User '$USER' renewed until $NEWDATE${NC}"
-}
-
-cekssh() {
-clear
-echo -e "${CYAN}============================================================${NC}"
-echo -e "${WHITE}         FazzPedia||Vpn - Check SSH Login${NC}"
-echo -e "${CYAN}============================================================${NC}"
-echo ""
-echo -e " ${WHITE}Active SSH Sessions:${NC}"
-echo ""
-who | awk '{print " User: "$1"\t IP: "$5"\t Time: "$3" "$4}'
-echo ""
-echo -e " ${YELLOW}Total users online: $(who | wc -l)${NC}"
-echo ""
-echo -e "${CYAN}============================================================${NC}"
-}
-
-member() {
-clear
-echo -e "${CYAN}============================================================${NC}"
-echo -e "${WHITE}         FazzPedia||Vpn - SSH Member List${NC}"
-echo -e "${CYAN}============================================================${NC}"
-printf " %-20s %-15s %-12s\n" "USERNAME" "EXPIRED" "STATUS"
-echo -e " ------------------------------------------------------------"
-while IFS=: read -r user _ uid _ _ _ shell; do
-    if [[ "$uid" -ge 1000 ]] && [[ "$shell" == "/bin/false" ]]; then
-        EXP=$(chage -l "$user" 2>/dev/null | grep "Account expires" | awk -F': ' '{print $2}')
-        TODAY=$(date +%s)
-        if [[ "$EXP" == "never" ]]; then
-            STATUS="${GREEN}Active${NC}"
-        else
-            EXP_TS=$(date -d "$EXP" +%s 2>/dev/null)
-            if [[ "$TODAY" -gt "$EXP_TS" ]]; then
-                STATUS="${RED}Expired${NC}"
-            else
-                STATUS="${GREEN}Active${NC}"
-            fi
-        fi
-        printf " %-20s %-15s " "$user" "$EXP"
-        echo -e "$STATUS"
-    fi
-done < /etc/passwd
-echo ""
-echo -e "${CYAN}============================================================${NC}"
-}
-
-delexp() {
-clear
-echo -e "${CYAN}============================================================${NC}"
-echo -e "${WHITE}      FazzPedia||Vpn - Delete Expired SSH Accounts${NC}"
-echo -e "${CYAN}============================================================${NC}"
-TODAY=$(date +%s)
-COUNT=0
-while IFS=: read -r user _ uid _ _ _ shell; do
-    if [[ "$uid" -ge 1000 ]] && [[ "$shell" == "/bin/false" ]]; then
-        EXP=$(chage -l "$user" 2>/dev/null | grep "Account expires" | awk -F': ' '{print $2}')
-        if [[ "$EXP" != "never" ]] && [[ ! -z "$EXP" ]]; then
-            EXP_TS=$(date -d "$EXP" +%s 2>/dev/null)
-            if [[ "$TODAY" -gt "$EXP_TS" ]]; then
-                userdel -r "$user" 2>/dev/null
-                echo -e " ${RED}Deleted:${NC} $user (expired: $EXP)"
-                ((COUNT++))
-            fi
-        fi
-    fi
-done < /etc/passwd
-echo ""
-echo -e " ${YELLOW}Total deleted: $COUNT accounts${NC}"
-echo -e "${CYAN}============================================================${NC}"
-}
-
-trialssh() {
-clear
-echo -e "${CYAN}============================================================${NC}"
-echo -e "${WHITE}       FazzPedia||Vpn - Create Trial SSH Account${NC}"
-echo -e "${CYAN}============================================================${NC}"
-echo ""
-TRIAL_USER="trial$(shuf -i 1000-9999 -n 1)"
-TRIAL_PASS="fazzpedia$(shuf -i 100-999 -n 1)"
-EXPDATE=$(date -d "+1 days" +"%Y-%m-%d")
-useradd -e "$EXPDATE" -s /bin/false -M "$TRIAL_USER"
-echo "$TRIAL_USER:$TRIAL_PASS" | chpasswd
-echo -e " ${YELLOW}Username   :${NC} $TRIAL_USER"
-echo -e " ${YELLOW}Password   :${NC} $TRIAL_PASS"
-echo -e " ${YELLOW}Expired    :${NC} $EXPDATE (1 day trial)"
-echo -e " ${YELLOW}Host/IP    :${NC} $MYIP"
-echo -e " ${YELLOW}SSH Port   :${NC} 22, 443"
-echo ""
-echo -e "${CYAN}============================================================${NC}"
-}
-
-autokill() {
-clear
-echo -e "${CYAN}============================================================${NC}"
-echo -e "${WHITE}        FazzPedia||Vpn - Setup Auto-Kill SSH${NC}"
-echo -e "${CYAN}============================================================${NC}"
-echo ""
-read -p " Enable auto-kill multi-login? [y/n]: " CONFIRM
-if [[ "$CONFIRM" == "y" ]]; then
-    cat > /etc/cron.d/fazzpedia-autokill <<'EOF'
-*/5 * * * * root /bin/bash /etc/fazzpedia/autokill.sh
-EOF
-    cat > /etc/fazzpedia/autokill.sh <<'AKEOF'
-#!/bin/bash
-while read user limit; do
-    ACTIVE=$(who | grep "^$user " | wc -l)
-    if [[ "$ACTIVE" -gt "$limit" ]]; then
-        who | grep "^$user " | awk '{print $2}' | while read tty; do
-            pkill -t "$tty" -u "$user" 2>/dev/null
-        done
-    fi
-done < /etc/fazzpedia/ssh_limits.conf
-AKEOF
-    chmod +x /etc/fazzpedia/autokill.sh
-    echo -e "${GREEN}[OK] Auto-kill enabled (checks every 5 minutes)${NC}"
-fi
-}
-
-ceklim() {
-clear
-echo -e "${CYAN}============================================================${NC}"
-echo -e "${WHITE}      FazzPedia||Vpn - Multi-Login Violators${NC}"
-echo -e "${CYAN}============================================================${NC}"
-echo ""
-while read user limit; do
-    ACTIVE=$(who | grep "^$user " | wc -l)
-    if [[ "$ACTIVE" -gt "$limit" ]]; then
-        echo -e " ${RED}VIOLATION${NC} - User: $user | Active: $ACTIVE | Limit: $limit"
-    fi
-done < /etc/fazzpedia/ssh_limits.conf 2>/dev/null
-echo ""
-echo -e "${CYAN}============================================================${NC}"
-}
-
-# Run the function passed as argument or show addssh by default
-case "$1" in
-    del) delssh ;;
-    renew) renewssh ;;
-    cek) cekssh ;;
-    member) member ;;
-    delexp) delexp ;;
-    trial) trialssh ;;
-    autokill) autokill ;;
-    ceklim) ceklim ;;
-    *) addssh ;;
-esac

@@ -1,182 +1,95 @@
 #!/bin/bash
-# ============================================================
-#   FazzPedia||Vpn - Xray Installer (VMess/VLess/Trojan)
-#   Support: Ubuntu 20.04 / 22.04 / 24.04
-# ============================================================
+export DEBIAN_FRONTEND=noninteractive
+GREEN='\033[0;32m'; NC='\033[0m'; YELLOW='\033[1;33m'; RED='\033[0;31m'
+MYIP=$(cat /etc/fazzpedia/myip 2>/dev/null || curl -s ipinfo.io/ip)
+echo -e "${YELLOW}[Xray] Installing...${NC}"
 
-RED='\033[0;31m'; NC='\033[0m'; GREEN='\033[0;32m'
-YELLOW='\033[1;33m'; WHITE='\033[1;37m'
+# Install Xray
+bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install 2>/dev/null
+if ! command -v xray &>/dev/null; then
+    wget -q https://github.com/XTLS/Xray-install/raw/main/install-release.sh -O /tmp/xray-install.sh
+    bash /tmp/xray-install.sh install 2>/dev/null
+fi
 
-MYIP=$(curl -s ipinfo.io/ip)
-source /etc/os-release
-VER=$VERSION_ID
+mkdir -p /etc/xray
 
-echo -e "${YELLOW}[XRAY] Installing Xray Core...${NC}"
-
-apt install -y curl wget unzip nginx
-
-# ============================================================
-# Install Xray Core (latest)
-# ============================================================
-bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install
-
-# ============================================================
 # Generate UUID
-# ============================================================
-UUID=$(xray uuid)
-echo "$UUID" > /etc/xray/uuid.conf
+UUID=$(cat /proc/sys/kernel/random/uuid)
+echo "$UUID" > /etc/xray/uuid
 
-# ============================================================
-# Self-Signed Cert for TLS
-# ============================================================
-mkdir -p /etc/xray/cert
-openssl req -new -x509 -days 3650 -nodes \
-    -out /etc/xray/cert/xray.crt \
-    -keyout /etc/xray/cert/xray.key \
-    -subj "/C=ID/ST=Indonesia/L=Jakarta/O=FazzPedia/CN=${MYIP}"
+# Domain
+DOMAIN=$(cat /etc/xray/domain 2>/dev/null || echo "$MYIP")
 
-# ============================================================
-# Xray Config
-# ============================================================
-cat > /etc/xray/config.json <<EOF
+# Generate self-signed cert jika belum ada
+if [ ! -f /etc/xray/xray.crt ]; then
+    openssl req -new -x509 -days 3650 -nodes \
+        -subj "/C=ID/ST=Indonesia/L=Indonesia/O=FazzPedia/CN=${DOMAIN}" \
+        -newkey rsa:2048 -keyout /etc/xray/xray.key -out /etc/xray/xray.crt 2>/dev/null
+fi
+
+# Xray config
+cat > /etc/xray/config.json <<-EOF
 {
-  "log": {
-    "loglevel": "warning",
-    "access": "/var/log/xray/access.log",
-    "error": "/var/log/xray/error.log"
-  },
+  "log": {"loglevel": "warning"},
   "inbounds": [
     {
       "port": 8443,
       "protocol": "vmess",
-      "tag": "vmess-tls",
-      "settings": {
-        "clients": [],
-        "disableInsecureEncryption": false
-      },
+      "settings": {"clients": [{"id": "${UUID}", "alterId": 0}]},
       "streamSettings": {
         "network": "ws",
         "security": "tls",
-        "tlsSettings": {
-          "certificates": [
-            {
-              "certificateFile": "/etc/xray/cert/xray.crt",
-              "keyFile": "/etc/xray/cert/xray.key"
-            }
-          ]
-        },
-        "wsSettings": {
-          "path": "/vmess-tls",
-          "headers": {}
-        }
-      }
+        "tlsSettings": {"certificates": [{"certificateFile": "/etc/xray/xray.crt", "keyFile": "/etc/xray/xray.key"}]},
+        "wsSettings": {"path": "/vmess"}
+      },
+      "tag": "vmess-tls"
     },
     {
       "port": 80,
       "protocol": "vmess",
-      "tag": "vmess-ntls",
-      "settings": {
-        "clients": [],
-        "disableInsecureEncryption": false
-      },
-      "streamSettings": {
-        "network": "ws",
-        "security": "none",
-        "wsSettings": {
-          "path": "/vmess-ntls",
-          "headers": {}
-        }
-      }
+      "settings": {"clients": [{"id": "${UUID}", "alterId": 0}]},
+      "streamSettings": {"network": "ws", "wsSettings": {"path": "/vmess"}},
+      "tag": "vmess-ntls"
     },
     {
       "port": 8442,
       "protocol": "vless",
-      "tag": "vless-tls",
-      "settings": {
-        "clients": [],
-        "decryption": "none"
-      },
+      "settings": {"clients": [{"id": "${UUID}"}], "decryption": "none"},
       "streamSettings": {
         "network": "ws",
         "security": "tls",
-        "tlsSettings": {
-          "certificates": [
-            {
-              "certificateFile": "/etc/xray/cert/xray.crt",
-              "keyFile": "/etc/xray/cert/xray.key"
-            }
-          ]
-        },
-        "wsSettings": {
-          "path": "/vless-tls",
-          "headers": {}
-        }
-      }
+        "tlsSettings": {"certificates": [{"certificateFile": "/etc/xray/xray.crt", "keyFile": "/etc/xray/xray.key"}]},
+        "wsSettings": {"path": "/vless"}
+      },
+      "tag": "vless-tls"
     },
     {
       "port": 8441,
       "protocol": "vless",
-      "tag": "vless-ntls",
-      "settings": {
-        "clients": [],
-        "decryption": "none"
-      },
-      "streamSettings": {
-        "network": "ws",
-        "security": "none",
-        "wsSettings": {
-          "path": "/vless-ntls",
-          "headers": {}
-        }
-      }
+      "settings": {"clients": [{"id": "${UUID}"}], "decryption": "none"},
+      "streamSettings": {"network": "ws", "wsSettings": {"path": "/vless"}},
+      "tag": "vless-ntls"
     },
     {
       "port": 2083,
       "protocol": "trojan",
-      "tag": "trojan",
-      "settings": {
-        "clients": [],
-        "fallbacks": []
-      },
+      "settings": {"clients": [{"password": "${UUID}"}]},
       "streamSettings": {
-        "network": "tcp",
+        "network": "ws",
         "security": "tls",
-        "tlsSettings": {
-          "certificates": [
-            {
-              "certificateFile": "/etc/xray/cert/xray.crt",
-              "keyFile": "/etc/xray/cert/xray.key"
-            }
-          ]
-        }
-      }
+        "tlsSettings": {"certificates": [{"certificateFile": "/etc/xray/xray.crt", "keyFile": "/etc/xray/xray.key"}]},
+        "wsSettings": {"path": "/trojan"}
+      },
+      "tag": "trojan"
     }
   ],
   "outbounds": [
-    {
-      "protocol": "freedom",
-      "settings": {}
-    },
-    {
-      "protocol": "blackhole",
-      "settings": {},
-      "tag": "blocked"
-    }
-  ],
-  "routing": {
-    "rules": [
-      {
-        "type": "field",
-        "ip": ["geoip:private"],
-        "outboundTag": "blocked"
-      }
-    ]
-  }
+    {"protocol": "freedom", "tag": "direct"},
+    {"protocol": "blackhole", "tag": "blocked"}
+  ]
 }
 EOF
 
-mkdir -p /var/log/xray
 systemctl enable xray
 systemctl restart xray
-
-echo -e "${GREEN}[XRAY] Installation complete! UUID: ${UUID}${NC}"
+echo -e "${GREEN}[Xray] Installation complete! UUID: ${UUID}${NC}"
